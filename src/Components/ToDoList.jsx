@@ -2,8 +2,9 @@ import { useEffect } from "react";
 
 export default function ToDoList({ taskList, setTaskList }) {
   useEffect(() => {
-    fetch('https://three-do-api-bc.web.app/tasks')  
+    // fetch('https://three-do-api-bc.web.app/tasks')  
     //using BC api until update permissions for mine
+    fetch('https://three-do-api-cc.web.app/tasks') 
     .then(results => results.json()) 
     .then(setTaskList) //tasks => setTaskList(tasks)
     .catch(console.error)
