@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import { List, Alert } from "antd";
 import ToDoListCard from "./ToDoListCard";
 
-export default function ToDoList({ taskList, setTaskList }) {
+export default function ToDoList({ taskList, setTaskList, token }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
   useEffect(() => {
-    // fetch('https://three-do-api-bc.web.app/tasks')
-    //using BC api until update permissions for mine
     // fetch("http://localhost:5001/tasks")
-    fetch("http://localhost:5001/three-do-api-cc/us-central1/api/tasks")
+    fetch("http://localhost:5001/three-do-api-cc/us-central1/api/tasks", {
+      headers: {
+        "Authorization": token,
+      }
+    })
       .then((results) => results.json())
-      // .then(setTaskList) //tasks => setTaskList(tasks)
       .then((tasks) => {
         setTaskList(tasks);
         setLoading(false);
@@ -22,20 +23,20 @@ export default function ToDoList({ taskList, setTaskList }) {
         setError(err.message);
         setLoading(false);
       });
-  }, [setTaskList, setLoading, setError]);
+  }, [token, setTaskList, setLoading, setError]);
 
 
   return (
     <>
-      {error && (
+      {(error && token) &&
         <Alert message="Error" description={error} type="error" showIcon />
-      )}
+      }
       <div className="task-list">
         <List
           dataSource={taskList}
           loading={loading}
           renderItem={(item) => (
-            <ToDoListCard key={item.id} item={item} setError={setError} setTaskList={setTaskList} setLoading={setLoading}/>
+            <ToDoListCard key={item.id} token={token} item={item} setError={setError} setTaskList={setTaskList} setLoading={setLoading}/>
           )}
           />
       </div>

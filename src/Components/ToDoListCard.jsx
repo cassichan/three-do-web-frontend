@@ -5,16 +5,18 @@ export default function ToDoListCard({
   setError,
   setTaskList,
   setLoading,
+  token,
 }) {
   const handleSwitch = () => {
     //Make a patch to api
     setLoading(true);
     const body = { done: !item.done };
     // fetch(`http://localhost:5001/tasks/${item.id}`, {
-        fetch(`http://localhost:5001/three-do-api-cc/us-central1/api/${item.id}`, {
+    fetch(`http://localhost:5001/three-do-api-cc/us-central1/api/tasks/${item.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify(body),
     })
@@ -33,14 +35,7 @@ export default function ToDoListCard({
   return (
     <List.Item key={item.id}>
       <List.Item.Meta
-        avatar={
-          <Switch
-            onChange={() => {
-              handleSwitch();
-            }}
-            checked={item.done}
-          />
-        }
+        avatar={<Switch onChange={() => handleSwitch()} checked={item.done} />}
         title={<p>{item.task}</p>}
       />
     </List.Item>

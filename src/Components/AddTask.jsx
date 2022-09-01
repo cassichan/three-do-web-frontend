@@ -2,13 +2,15 @@ import { Input } from "antd";
 import { useState } from "react";
 const { Search } = Input;
 
-export default function AddTask({ setTaskList }) {
+export default function AddTask({ setTaskList, token }) {
   const [task, setTask] = useState(" ");
   const addTask = () => {
-    fetch("https://three-do-api-cc.web.app/tasks", {
-      method: "POST",
+    fetch("http://localhost:5001/three-do-api-cc/us-central1/api/tasks", {
+    // fetch("https://three-do-api-cc.web.app/tasks", {
+    method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": token,
       },
       body: JSON.stringify({ task, done: false })
     })
