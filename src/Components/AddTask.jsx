@@ -20,8 +20,8 @@ export default function AddTask({ setTaskList }) {
       .catch(console.error);
   };
   return (
-    <>
+    <div className="add-task">
       <Search value={task} onChange={e => setTask(e.target.value)} enterButton="Add" size="large" onSearch={addTask} />
-    </>
+    </div>
   );
 }
