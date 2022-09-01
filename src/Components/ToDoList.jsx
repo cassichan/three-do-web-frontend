@@ -9,7 +9,8 @@ export default function ToDoList({ taskList, setTaskList }) {
   useEffect(() => {
     // fetch('https://three-do-api-bc.web.app/tasks')
     //using BC api until update permissions for mine
-    fetch("http://localhost:5000/tasks")
+    // fetch("http://localhost:5001/tasks")
+    fetch("http://localhost:5001/three-do-api-cc/us-central1/api/tasks")
       .then((results) => results.json())
       // .then(setTaskList) //tasks => setTaskList(tasks)
       .then((tasks) => {

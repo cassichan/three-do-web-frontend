@@ -10,7 +10,8 @@ export default function ToDoListCard({
     //Make a patch to api
     setLoading(true);
     const body = { done: !item.done };
-    fetch(`http://localhost:5000/tasks/${item.id}`, {
+    // fetch(`http://localhost:5001/tasks/${item.id}`, {
+        fetch(`http://localhost:5001/three-do-api-cc/us-central1/api/${item.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
